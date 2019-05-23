@@ -1,0 +1,49 @@
+<!-- WINDOW TEMPLATE -->
+
+<div class="window">
+	<div class="title">
+	</div>
+	<div class="field">
+		<span></span>
+	</div>
+	<div class="footer">
+		<div class="close-window">ZAMKNIJ</div>
+	</div>
+</div>
+
+<!-- SCRIPT FOR WINDOW -->
+
+<script>
+	//WINDOW
+	$(".close-window").click(function(){
+		$(this).parent().parent().css("display", "none");
+	})
+	
+	var clicking = false;
+	var x0;
+	var y0;
+	var obj;
+	$(".title").mousedown(function(e){
+		clicking = true;
+		x0 = e.pageX - $(this).parent().position().left - $(document).scrollLeft();
+		y0 = e.pageY -  $(this).parent().position().top - $(document).scrollTop();	
+		obj = $(this).parent();
+	});
+	$(document).mouseup(function(){
+		clicking = false;
+		obj = "";
+	})
+
+	$(document).mousemove(function(e){
+		if(clicking == false) 
+			return;		
+		if(clicking == true){
+			console.log(x0 + " " + y0)
+			console.log(" ")
+			obj.css("left", e.pageX - x0 - $(document).scrollLeft());
+			obj.css("top", e.pageY - y0 - $(document).scrollTop());			
+		}
+		
+		//console.log((e.pageX - x0 - $(document).scrollLeft()) + "  " + (e.pageY - y0 - $(document).scrollTop()))
+	})
+</script>
